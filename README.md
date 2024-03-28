@@ -5,7 +5,7 @@ A simple memory cache using buffers and byte limits
 ## Usage
 
 ```typescript
-const cache: MemoryCache<number, TestingType> = new MemoryCache([[{ id: 1 }]], {
+const cache: BufferCache<number, TestingType> = new BufferCache([[{ id: 1 }]], {
   ttl: 1,
   maxByteSize: 900,
   resizeStrategy: 'LARGEST',

@@ -1,4 +1,4 @@
-import { MemoryCache } from '../src/lib/MemoryCache';
+import { BufferCache } from '../src/lib/BufferCache';
 
 type TestingType = Partial<{
   id: number;
@@ -20,14 +20,14 @@ const largeItem = {
     'adding way more than we need to the buffer, plus this should be a very large item anyway......!!!!!',
 };
 
-function reset(cache: MemoryCache<unknown, unknown>) {
+function reset(cache: BufferCache<unknown, unknown>) {
   cache.clear();
   cache.close();
 }
 
-describe('MemoryCache', () => {
+describe('BufferCache', () => {
   describe('basic map functionality', () => {
-    const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+    const cache: BufferCache<number, TestingType> = new BufferCache(null, {
       ttl: 50000,
     });
 
@@ -72,7 +72,7 @@ describe('MemoryCache', () => {
     });
 
     it('will set initial items', () => {
-      const testCache = new MemoryCache([
+      const testCache = new BufferCache([
         [1, { id: 1 }],
         [2, { id: 2 }],
       ]);
@@ -91,7 +91,7 @@ describe('MemoryCache', () => {
 
   describe('memory tests', () => {
     describe('largest removed strategy', () => {
-      const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
         maxByteSize: 200,
         resizeStrategy: 'LARGEST',
       });
@@ -132,7 +132,7 @@ describe('MemoryCache', () => {
     });
 
     describe('first removed strategy', () => {
-      const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
         maxByteSize: 200,
         resizeStrategy: 'FIRST',
       });
@@ -160,7 +160,7 @@ describe('MemoryCache', () => {
     });
 
     describe('last removed strategy', () => {
-      const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
         maxByteSize: 200,
         resizeStrategy: 'LAST',
       });
@@ -187,7 +187,7 @@ describe('MemoryCache', () => {
 
     describe('stress test', () => {
       // caps at 99999999
-      const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
         maxByteSize: 9999999999,
         resizeStrategy: 'LARGEST',
       });
@@ -212,7 +212,7 @@ describe('MemoryCache', () => {
   });
 
   describe('ttl test', () => {
-    const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+    const cache: BufferCache<number, TestingType> = new BufferCache(null, {
       ttl: 1,
       maxByteSize: 900,
       resizeStrategy: 'FIRST',
@@ -237,7 +237,7 @@ describe('MemoryCache', () => {
   });
 
   describe('cache lifetime test', () => {
-    const cache: MemoryCache<number, TestingType> = new MemoryCache(null, {
+    const cache: BufferCache<number, TestingType> = new BufferCache(null, {
       ttl: 8000,
       expireCache: 1,
       maxByteSize: 900,

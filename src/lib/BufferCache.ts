@@ -1,4 +1,4 @@
-export interface IMemoryCache<K = string, V = unknown> {
+export interface IBufferCache<K = string, V = unknown> {
   size: number;
   get: <Data = V>(key: K) => Data;
   set: <Data = V>(key: K, value: Data) => this;
@@ -42,8 +42,8 @@ interface CacheObject {
   buffer: Buffer;
 }
 
-export class MemoryCache<K = string, V = unknown>
-  implements IMemoryCache<K, V>
+export class BufferCache<K = string, V = unknown>
+  implements IBufferCache<K, V>
 {
   public cacheSize = 0;
 
