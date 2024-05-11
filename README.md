@@ -1,4 +1,4 @@
-# BufferCache
+# buffer-cache
 
 A simple memory cache using buffers and byte limits
 
