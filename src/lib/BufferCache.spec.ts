@@ -1,4 +1,4 @@
-import { BufferCache } from '../src/lib/BufferCache';
+import { BufferCache } from './BufferCache';
 
 type TestingType = Partial<{
   id: number;
@@ -27,7 +27,7 @@ function reset(cache: BufferCache<unknown, unknown>) {
 
 describe('BufferCache', () => {
   describe('basic map functionality', () => {
-    const cache: BufferCache<number, TestingType> = new BufferCache(null, {
+    const cache: BufferCache<number, TestingType> = new BufferCache(undefined, {
       ttl: 50000,
     });
 
@@ -91,10 +91,13 @@ describe('BufferCache', () => {
 
   describe('memory tests', () => {
     describe('largest removed strategy', () => {
-      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
-        maxByteSize: 200,
-        resizeStrategy: 'LARGEST',
-      });
+      const cache: BufferCache<number, TestingType> = new BufferCache(
+        undefined,
+        {
+          maxByteSize: 200,
+          resizeStrategy: 'LARGEST',
+        }
+      );
 
       afterEach(() => reset(cache));
 
@@ -132,10 +135,13 @@ describe('BufferCache', () => {
     });
 
     describe('first removed strategy', () => {
-      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
-        maxByteSize: 200,
-        resizeStrategy: 'FIRST',
-      });
+      const cache: BufferCache<number, TestingType> = new BufferCache(
+        undefined,
+        {
+          maxByteSize: 200,
+          resizeStrategy: 'FIRST',
+        }
+      );
 
       afterEach(() => reset(cache));
 
@@ -160,10 +166,13 @@ describe('BufferCache', () => {
     });
 
     describe('last removed strategy', () => {
-      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
-        maxByteSize: 200,
-        resizeStrategy: 'LAST',
-      });
+      const cache: BufferCache<number, TestingType> = new BufferCache(
+        undefined,
+        {
+          maxByteSize: 200,
+          resizeStrategy: 'LAST',
+        }
+      );
 
       afterEach(() => reset(cache));
 
@@ -187,10 +196,13 @@ describe('BufferCache', () => {
 
     describe('stress test', () => {
       // caps at 99999999
-      const cache: BufferCache<number, TestingType> = new BufferCache(null, {
-        maxByteSize: 9999999999,
-        resizeStrategy: 'LARGEST',
-      });
+      const cache: BufferCache<number, TestingType> = new BufferCache(
+        undefined,
+        {
+          maxByteSize: 9999999999,
+          resizeStrategy: 'LARGEST',
+        }
+      );
 
       afterEach(() => reset(cache));
 
@@ -212,7 +224,7 @@ describe('BufferCache', () => {
   });
 
   describe('ttl test', () => {
-    const cache: BufferCache<number, TestingType> = new BufferCache(null, {
+    const cache: BufferCache<number, TestingType> = new BufferCache(undefined, {
       ttl: 1,
       maxByteSize: 900,
       resizeStrategy: 'FIRST',
@@ -237,7 +249,7 @@ describe('BufferCache', () => {
   });
 
   describe('cache lifetime test', () => {
-    const cache: BufferCache<number, TestingType> = new BufferCache(null, {
+    const cache: BufferCache<number, TestingType> = new BufferCache(undefined, {
       ttl: 8000,
       expireCache: 1,
       maxByteSize: 900,
